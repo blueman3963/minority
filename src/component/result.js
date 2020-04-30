@@ -70,14 +70,14 @@ class Result extends React.Component {
           </div>
           <div>
             {
-              this.props.portion?Math.floor(this.props.portion)*100+'%':'N/A'
+              this.props.portion !== null?Math.floor(this.props.portion)*100+'%':'N/A'
             }
             {
               this.props.A
             }
             <br/>
             {
-              this.props.portion?Math.floor(1-this.props.portion)*100+'%':'N/A'
+              this.props.portion !== null?Math.floor(1-this.props.portion)*100+'%':'N/A'
             }
             {
               this.props.B
