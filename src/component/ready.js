@@ -32,7 +32,8 @@ class Ready extends React.Component {
       this.setState({step:1,q: q.q, a:q.a, b:q.b})
     });
     socket.on('majority', q => {
-      this.canvas.current.style.opacity = 1
+      setTimeout(() => {this.canvas.current.style.opacity = 1},5000)
+
       let choose = this.x < .5 ? '1' : '-1'
       socket.emit('q',choose)
       this.setState({step:2,q: 'm', a:'I gave the majority answer', b:'I gave the minority answer'})
@@ -125,13 +126,13 @@ class Ready extends React.Component {
 
             </div>
           :this.state.step === 1
-          ?<Dilemma Q={this.state.q} A={this.state.a} B={this.state.b} countdown={20}/>
+          ?<Dilemma Q={this.state.q} A={this.state.a} B={this.state.b} countdown={5}/>
           :this.state.step === 2
-          ?<Dilemma Q={this.state.q} A={this.state.a} B={this.state.b} countdown={100}/>
+          ?<Dilemma Q={this.state.q} A={this.state.a} B={this.state.b} countdown={20}/>
           :this.state.step === 3
           ?<div className='calculate'><div className='load'>Loading...</div></div>
           :this.state.step === 4
-          ?<Result users={this.state.users} win={this.state.win} life={this.state.life} countdown={15}/>
+          ?<Result users={this.state.users} win={this.state.win} life={this.state.life} countdown={10}/>
           :this.state.step === 5
           ?<Over users={this.state.users} countdown={30}/>
           :''
