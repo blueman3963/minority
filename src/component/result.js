@@ -27,7 +27,7 @@ class Result extends React.Component {
     Object.keys(this.props.users).forEach(i => {
       users.push(this.props.users[i])
     })
-    users.sort((a, b) => (a.life > b.life) ? 1 : -1)
+    users.sort((a, b) => (a.life < b.life) ? 1 : -1)
     this.setState({users})
 
     let portion = a/(a+b)*100
@@ -62,7 +62,7 @@ class Result extends React.Component {
           <div>
           {
             this.props.life < 1
-            ? 'You have lost! Know you can see other\'s answer during the question section, and you can still play and affect which answer is majority/minority'
+            ? 'You Are Out!'
             : this.props.win
             ? 'you survived! '+this.props.life+' life(s) left'
             : 'dang, you only have '+this.props.life +' life(s) left'
@@ -70,14 +70,14 @@ class Result extends React.Component {
           </div>
           <div>
             {
-              this.props.portion !== null?Math.floor(this.props.portion)*100+'%':'N/A'
+              this.props.portion !== null?Math.floor(this.props.portion*100)+'%':'N/A'
             }
             {
               this.props.A
             }
             <br/>
             {
-              this.props.portion !== null?Math.floor(1-this.props.portion)*100+'%':'N/A'
+              this.props.portion !== null?Math.floor(1-this.props.portion*100)+'%':'N/A'
             }
             {
               this.props.B
