@@ -8,7 +8,8 @@ class Result extends React.Component {
     this.itv = null
     this.state = {
       countdown: this.props.countdown,
-      users: []
+      users: [],
+      portion:null,
     }
   }
 
@@ -22,11 +23,15 @@ class Result extends React.Component {
     },1000)
 
     let users = []
+    let a=0,b=0
     Object.keys(this.props.users).forEach(i => {
       users.push(this.props.users[i])
-      users.sort((a, b) => (a.life > b.life) ? 1 : -1)
-      this.setState({users})
     })
+    users.sort((a, b) => (a.life > b.life) ? 1 : -1)
+    this.setState({users})
+
+    let portion = a/(a+b)*100
+    this.setState({portion})
   }
 
   render() {
@@ -62,6 +67,21 @@ class Result extends React.Component {
             ? 'you survived! '+this.props.life+' life(s) left'
             : 'dang, you only have '+this.props.life +' life(s) left'
           }
+          </div>
+          <div>
+            {
+              this.props.portion?Math.floor(this.props.portion)*100+'%':'N/A'
+            }
+            {
+              this.props.A
+            }
+            <br/>
+            {
+              this.props.portion?Math.floor(1-this.props.portion)*100+'%':'N/A'
+            }
+            {
+              this.props.B
+            }
           </div>
           <div>&nbsp;</div>
           <div>

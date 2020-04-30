@@ -15,10 +15,13 @@ class Ready extends React.Component {
       q: '',
       a: '',
       b: '',
+      qa:'',
+      qb:'',
       res: '',
       life: 3,
       win: true,
-      users:[]
+      users:[],
+      portion: null
     }
     this.x = 0
   }
@@ -29,7 +32,7 @@ class Ready extends React.Component {
         this.canvas.current.style.opacity = 0
       }
       this.setState({win:true})
-      this.setState({step:1,q: q.q, a:q.a, b:q.b})
+      this.setState({step:1,q: q.q, a:q.a, b:q.b, qa:q.a, qb:q.b})
     });
     socket.on('majority', q => {
       setTimeout(() => {this.canvas.current.style.opacity = 1},5000)
@@ -44,13 +47,12 @@ class Ready extends React.Component {
       this.setState({step:3})
     });
     socket.on('finalresult', res => {
-      this.setState({step:4,users:res})
-      if(res[socket.id].life<this.state.life) {
-        this.setState({win:false, life:res[socket.id].life})
+      this.setState({step:4,users:res.users,portion:res.portion})
+      if(res.users[socket.id].life<this.state.life) {
+        this.setState({win:false, life:res.users[socket.id].life})
       }
     })
     socket.on('gameover', res => {
-      console.log(1)
       this.setState({step:5,users:res})
     })
     socket.on('restart', res => {
@@ -132,7 +134,7 @@ class Ready extends React.Component {
           :this.state.step === 3
           ?<div className='calculate'><div className='load'>Loading...</div></div>
           :this.state.step === 4
-          ?<Result users={this.state.users} win={this.state.win} life={this.state.life} countdown={5}/>
+          ?<Result portion={this.state.portion} A={this.state.qa} B={this.state.qb} users={this.state.users} win={this.state.win} life={this.state.life} countdown={5}/>
           :this.state.step === 5
           ?<Over users={this.state.users} countdown={30}/>
           :''
