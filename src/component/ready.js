@@ -131,7 +131,7 @@ class Ready extends React.Component {
           :this.state.step === 3
           ?<div className='calculate'><div className='load'>Loading...</div></div>
           :this.state.step === 4
-          ?<Result users={this.state.users} win={this.state.win} life={this.state.life} countdown={20}/>
+          ?<Result users={this.state.users} win={this.state.win} life={this.state.life} countdown={15}/>
           :this.state.step === 5
           ?<Over users={this.state.users} countdown={30}/>
           :''

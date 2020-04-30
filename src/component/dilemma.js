@@ -107,6 +107,7 @@ class Dilemma extends React.Component {
           transform: translate(-50%, -50%);
           opacity: .2;
           transition-duration: .2s;
+          max-width: 40vw;
         }
       `}</style>
         <div className='select-wrapper'>
